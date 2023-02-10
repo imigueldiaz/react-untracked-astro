@@ -1,5 +1,11 @@
 import React, {useState, useEffect} from 'react';
-import {MapContainer, Marker, TileLayer, Tooltip} from 'react-leaflet';
+import {
+	LayersControl,
+	MapContainer,
+	Marker,
+	TileLayer,
+	Tooltip,
+} from 'react-leaflet';
 import L, {LatLng} from 'leaflet';
 
 import 'leaflet/dist/leaflet.css';
@@ -73,12 +79,40 @@ const Map = (): JSX.Element => {
 			maxZoom={17}
 		>
 			<OsmSearchControl></OsmSearchControl>
-			<TileLayer
-				attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-				url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
-			/>
+			<LayersControl>
+				<LayersControl.BaseLayer checked name='OpenStreetMaps'>
+					<TileLayer
+						zIndex={1}
+						attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+						url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
+					/>
+				</LayersControl.BaseLayer>
+				<LayersControl.BaseLayer checked name='ESRI World Imagery'>
+					<TileLayer
+						zIndex={2}
+						attribution='Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
+						url='https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}'
+						minZoom={13}
+						maxZoom={17}
+					/>
+				</LayersControl.BaseLayer>
+				<LayersControl.Overlay checked name='Polución lumínica 2020'>
+					<TileLayer
+						zIndex={3}
+						attribution='<a href="https://djlorenz.github.io/astronomy/lp2020/" target="_blank">Light Pollution Atlas Information</a>'
+						url='https://djlorenz.github.io/astronomy/lp2020/overlay/tiles/tile_{z}_{x}_{y}.png'
+						opacity={0.5}
+						zoomOffset={-2}
+						tileSize={1024}
+						minZoom={13}
+						maxNativeZoom={8}
+						maxZoom={17}
+					/>
+				</LayersControl.Overlay>
+			</LayersControl>
+
 			<Marker position={position}>
-				<Tooltip>Estamos aquí</Tooltip>
+				<Tooltip>Hola</Tooltip>
 			</Marker>
 		</MapContainer>
 	);
