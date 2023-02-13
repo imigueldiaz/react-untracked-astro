@@ -10,23 +10,16 @@ import L, {LatLng} from 'leaflet';
 
 import 'leaflet/dist/leaflet.css';
 import './Map.css';
-import './geosearch.css';
 
 import RetinaMarkerIcon from 'leaflet/dist/images/marker-icon-2x.png';
 import MarkerIcon from 'leaflet/dist/images/marker-icon.png';
 import MarkerShadow from 'leaflet/dist/images/marker-shadow.png';
 
-import OsmSearchControl from './OsmSearchControl';
-
-type State = {
-	lat: number;
-	lng: number;
-	zoom: number;
-	isLoading: boolean;
-};
+import OsmSearchControl from '../OsmSearchControl/OsmSearchControl';
+import {type MapState} from '../../utils/Utils';
 
 const Map = (): JSX.Element => {
-	const [state, setState] = useState<State>({
+	const [state, setState] = useState<MapState>({
 		lat: 0,
 		lng: 0,
 		zoom: 15,
