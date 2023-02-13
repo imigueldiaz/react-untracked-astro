@@ -3,6 +3,7 @@ import {
 	LayersControl,
 	MapContainer,
 	Marker,
+	ScaleControl,
 	TileLayer,
 	Tooltip,
 } from 'react-leaflet';
@@ -71,6 +72,7 @@ const Map = (): JSX.Element => {
 			minZoom={13}
 			maxZoom={17}
 		>
+			<ScaleControl></ScaleControl>
 			<OsmSearchControl></OsmSearchControl>
 			<LayersControl>
 				<LayersControl.BaseLayer checked name='OpenStreetMaps'>
